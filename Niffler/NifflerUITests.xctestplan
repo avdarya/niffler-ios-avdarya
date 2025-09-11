@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "A2321C38-E4D2-4700-846F-E1E7AD8E9FEE",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Niffler.xcodeproj",
+        "identifier" : "2FFCF6342E7281ED001574F7",
+        "name" : "NifflerUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
