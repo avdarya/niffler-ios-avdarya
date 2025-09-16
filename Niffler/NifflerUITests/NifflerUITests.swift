@@ -9,33 +9,47 @@ import XCTest
 
 final class NifflerUITests: XCTestCase {
     
+    enum Locators {
+        enum Login {
+            static let usernameField = "userNameTextField"
+            static let passwordField = "passwordTextField"
+            static let loginButton   = "loginButton"
+        }
+        
+        enum SignUp {
+            static let usernameField        = "userNameTextField"
+            static let passwordField        = "passwordTextField"
+            static let confirmPasswordField = "confirmPasswordTextField"
+            static let signUpButton         = "Sign Up"
+        }
+        
+        enum Alerts {
+            static let congratulationsTitle   = "Congratulations!"
+            static let congratulationsMessage = " You've registered!"
+            static let loginButton            = "Log in"
+        }
+    }
+    
     var app: XCUIApplication!
 
     override func setUp() {
         super.setUp()
-        
         launchAppWithoutLogin()
     }
     
     func testLoginSuccessful() throws {
-        launchAppWithoutLogin()
-        
         fillAndSubmitLoginForm(login: "stage", password: "12345")
                 
         assertSpendsViewAppeared()
     }
     
     func testLoginFailure() throws {
-        launchAppWithoutLogin()
-        
         fillAndSubmitLoginForm(login: "stage", password: "123456")
         
         assertErrorLoginShown()
     }
     
     func testRegistration() throws {
-        launchAppWithoutLogin()
-        
         tapCreateNewAccountButton()
         
         let randomUsername = generateRandomUsername()
@@ -51,8 +65,6 @@ final class NifflerUITests: XCTestCase {
     }
     
     func testLoginPrefilledData() throws {
-        launchAppWithoutLogin()
-
         tapCreateNewAccountButton()
 
         let randomUsername = generateRandomUsername()
@@ -73,8 +85,6 @@ final class NifflerUITests: XCTestCase {
     }
 
     func testSignUpPrefilledData() throws {
-        launchAppWithoutLogin()
-
         let randomUsername = generateRandomUsername()
         let randomPassword = generateRandomPassword()
   
@@ -102,42 +112,42 @@ final class NifflerUITests: XCTestCase {
     
     private func input(login: String) {
         XCTContext.runActivity(named: "Ввод логина \(login)") { _ in
-            app.textFields["userNameTextField"].tap()
-            app.textFields["userNameTextField"].typeText(login)
+            app.textFields[Locators.Login.usernameField].tap()
+            app.textFields[Locators.Login.usernameField].typeText(login)
         }
     }
     
     private func input(password: String) {
-        XCTContext.runActivity(named: "Ввод пароля \(password)") { _ in app.secureTextFields["passwordTextField"].tap()
-            app.secureTextFields["passwordTextField"].typeText(password)
+        XCTContext.runActivity(named: "Ввод пароля \(password)") { _ in app.secureTextFields[Locators.Login.passwordField].tap()
+            app.secureTextFields[Locators.Login.passwordField].typeText(password)
         }
     }
     
     private func input(username: String, signUpForm: XCUIElement) {
         XCTContext.runActivity(named: "Ввод username \(username)") { _ in
-            signUpForm.textFields["userNameTextField"].tap()
-            signUpForm.textFields["userNameTextField"].typeText(username)
+            signUpForm.textFields[Locators.SignUp.usernameField].tap()
+            signUpForm.textFields[Locators.SignUp.usernameField].typeText(username)
         }
     }
     
     private func input(password: String, signUpForm: XCUIElement) {
         XCTContext.runActivity(named: "Ввод пароля \(password)") { _ in
-            signUpForm.buttons["passwordTextField"].tap()
-            signUpForm.textFields["passwordTextField"].tap()
-            signUpForm.textFields["passwordTextField"].typeText(String(password))
+            signUpForm.buttons[Locators.SignUp.passwordField].tap()
+            signUpForm.textFields[Locators.SignUp.passwordField].tap()
+            signUpForm.textFields[Locators.SignUp.passwordField].typeText(String(password))
         }
     }
     
     private func input(confirmPassword: String, signUpForm: XCUIElement) {
         XCTContext.runActivity(named: "Ввод подтверждающего пароля \(confirmPassword)") { _ in
-            signUpForm.buttons["confirmPasswordTextField"].tap()
-            signUpForm.textFields["confirmPasswordTextField"].tap()
-            signUpForm.textFields["confirmPasswordTextField"].typeText(String(confirmPassword))
+            signUpForm.buttons[Locators.SignUp.confirmPasswordField].tap()
+            signUpForm.textFields[Locators.SignUp.confirmPasswordField].tap()
+            signUpForm.textFields[Locators.SignUp.confirmPasswordField].typeText(String(confirmPassword))
         }
     }
     
     private func tapLoginButton() {
-        XCTContext.runActivity(named: "Нажатие кнопки Log in") { _ in app.buttons["loginButton"].tap()
+        XCTContext.runActivity(named: "Нажатие кнопки Log in") { _ in app.buttons[Locators.Login.loginButton].tap()
         }
     }
     
@@ -157,13 +167,13 @@ final class NifflerUITests: XCTestCase {
     
     private func tapSignUpButton() {
         XCTContext.runActivity(named: "Нажатие кнопки Sign Up") { _ in
-            app.buttons["Sign Up"].tap()
+            app.buttons[Locators.SignUp.signUpButton].tap()
         }
     }
     
     private func tapTogglePassword() {
         XCTContext.runActivity(named: "Нажатие кнопки показа/скрытия пароля") { _ in
-            app.buttons["passwordTextField"].tap()
+            app.buttons[Locators.Login.passwordField].tap()
         }
     }
     
@@ -184,7 +194,7 @@ final class NifflerUITests: XCTestCase {
     
     private func waitForSignUpScreen() {
         XCTContext.runActivity(named: "Дождаться загрузки экрана Sing up") { _ in
-            let _ = app.staticTexts["Sign Up"].waitForExistence(timeout: 10)
+            let _ = app.staticTexts[Locators.SignUp.signUpButton].waitForExistence(timeout: 10)
         }
     }
     
@@ -196,14 +206,14 @@ final class NifflerUITests: XCTestCase {
     
     private func getSignUpForm() -> XCUIElement {
         XCTContext.runActivity(named: "Получение формы регистрации") { _ in
-            return app.otherElements.containing(.staticText, identifier: "Sign Up").element
+            return app.otherElements.containing(.staticText, identifier: Locators.SignUp.signUpButton).element
         }
     }
     
     private func getAlert() -> XCUIElement {
         XCTContext.runActivity(named: "Получение алерта 'Congratulations!'") { _ in
             let _ = app.alerts.firstMatch.waitForExistence(timeout: 10)
-            return app.alerts["Congratulations!"]
+            return app.alerts[Locators.Alerts.congratulationsTitle]
         }
     }
     
@@ -215,12 +225,12 @@ final class NifflerUITests: XCTestCase {
     
     private func generateRandomUsername() -> String {
         XCTContext.runActivity(named: "Генерация имени пользователя") { _ in
-            return "user_" + String(Int(Date().timeIntervalSince1970))
+            return "user_" + String(UUID().uuidString.prefix(8))
         }
     }
 
     private func generateRandomPassword() -> String {
-        XCTContext.runActivity(named: "Генарация пароля") { _ in
+        XCTContext.runActivity(named: "Генерация пароля") { _ in
             return String(Int(Date().timeIntervalSince1970))
         }
     }
@@ -228,7 +238,7 @@ final class NifflerUITests: XCTestCase {
     private func tapAlertLogInButton() {
         XCTContext.runActivity(named: "Нажатие кнопки Log in в алерте 'Congratulations!'") { _ in
             let alert = getAlert()
-            alert.buttons["Log in"].tap()
+            alert.buttons[Locators.Alerts.loginButton].tap()
         }
     }
     
@@ -254,21 +264,21 @@ final class NifflerUITests: XCTestCase {
     func assertSuccessAlertShown(file: StaticString = #filePath, line: UInt = #line) {
         XCTContext.runActivity(named: "Проверка корректности алерта 'Congratulations!'") { _ in
             let alert = getAlert()
-            let alertTitleText = alert.staticTexts["Congratulations!"]
+            let alertTitleText = alert.staticTexts[Locators.Alerts.congratulationsTitle]
             XCTAssertTrue(
                 alertTitleText.exists,
                 "Заголовок алерта 'Congratulations!' не совпадает",
                 file: file,
                 line: line
             )
-            let alertMessageText = alert.staticTexts[" You've registered!"]
+            let alertMessageText = alert.staticTexts[Locators.Alerts.congratulationsMessage]
             XCTAssertTrue(
                 alertMessageText.exists,
                 "Сообщение в алерте 'Congratulations!' не совпадает",
                 file: file,
                 line: line
             )
-            let loginAlertButton = alert.buttons["Log in"]
+            let loginAlertButton = alert.buttons[Locators.Alerts.loginButton]
             XCTAssertTrue(
                 loginAlertButton.exists,
                 "Не найден кнопка Login в алерте 'Congratulations!'",
@@ -280,7 +290,7 @@ final class NifflerUITests: XCTestCase {
     
     func assertUsernameLoginScreenPrefilled(username: String) {
         XCTContext.runActivity(named: "Проверка предзаполнения поля username на экране Log In") { _ in
-            let usernameField = app.textFields["userNameTextField"]
+            let usernameField = app.textFields[Locators.Login.usernameField]
             XCTAssertEqual(usernameField.value as? String, username)
         }
         
@@ -288,7 +298,7 @@ final class NifflerUITests: XCTestCase {
     
     func assertSecurePasswordLoginScreenPrefilled() {
         XCTContext.runActivity(named: "Проверка предзаполнения поля password на экране Log In") { _ in
-            let passwordSecureField = app.secureTextFields["passwordTextField"]
+            let passwordSecureField = app.secureTextFields[Locators.Login.passwordField]
             XCTAssertTrue((passwordSecureField.value as? String)?.contains("•") == true)
         }
     }
@@ -296,21 +306,21 @@ final class NifflerUITests: XCTestCase {
     func assertPasswordLoginScreenPrefilled(password: String) {
         XCTContext.runActivity(named: "Проверка значения в предзаполненном поле password на экране Log In") { _ in
             tapTogglePassword()
-            let passwordField = app.textFields["passwordTextField"]
+            let passwordField = app.textFields[Locators.Login.passwordField]
             XCTAssertEqual(passwordField.value as? String, password)
         }
     }
     
     func assertUsernameSignUpScreenPrefilled(username: String, signUpForm: XCUIElement) {
         XCTContext.runActivity(named: "Проверка предзаполнения поля username на экране Sign Up") { _ in
-            let usernameField = signUpForm.textFields["userNameTextField"]
+            let usernameField = signUpForm.textFields[Locators.SignUp.usernameField]
             XCTAssertEqual(usernameField.value as? String, username)
         }
 
     }
     func assertSecurePasswordSignUpScreenPrefilled(signUpForm: XCUIElement) {
         XCTContext.runActivity(named: "Проверка предзаполнения поля password на экране Sign Up") { _ in
-            let passwordSecureField = signUpForm.secureTextFields["passwordTextField"]
+            let passwordSecureField = signUpForm.secureTextFields[Locators.SignUp.passwordField]
             XCTAssertTrue((passwordSecureField.value as? String)?.contains("•") == true)
         }
 
@@ -318,8 +328,8 @@ final class NifflerUITests: XCTestCase {
     
     func assertPasswordSignUpScreenPrefilled(password: String, signUpForm: XCUIElement) {
         XCTContext.runActivity(named: "Проверка значения в предзаполненном поле password на экране Sign Up") { _ in
-            signUpForm.buttons["passwordTextField"].tap()
-            let passwordField = signUpForm.textFields["passwordTextField"]
+            signUpForm.buttons[Locators.SignUp.passwordField].tap()
+            let passwordField = signUpForm.textFields[Locators.SignUp.passwordField]
             XCTAssertEqual(passwordField.value as? String, password)
         }
     }
