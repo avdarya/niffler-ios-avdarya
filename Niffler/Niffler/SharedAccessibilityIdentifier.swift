@@ -19,8 +19,8 @@ enum SpendsViewIDs: String {
 }
 
 enum SignUpViewIDs: String {
-    case userNameTextField = "userNameTextField"
-    case passwordTextField = "passwordTextField"
-    case confirmPasswordTextField = "confirmPasswordTextField"
+    case userNameTextField = "userNameTextFieldSignUp"
+    case passwordTextField = "passwordTextFieldSignUp"
+    case confirmPasswordTextField = "confirmPasswordTextFieldSignUp"
     case signUpButton = "signUpButton"
 }
