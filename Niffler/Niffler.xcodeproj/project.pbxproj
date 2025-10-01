@@ -45,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		2FD8D9D42E728B71002766B4 /* NifflerUITests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = NifflerUITests.xctestplan; sourceTree = "<group>"; };
+		2FF4ADBE2E8D0764007DD8DC /* Niffler.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = Niffler.xctestplan; sourceTree = "<group>"; };
 		2FFCF6352E7281ED001574F7 /* NifflerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NifflerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		746853762B0CAE9700E48DFE /* Niffler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Niffler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		746853792B0CAE9700E48DFE /* NifflerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NifflerApp.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		7468536D2B0CAE9700E48DFE = {
 			isa = PBXGroup;
 			children = (
+				2FF4ADBE2E8D0764007DD8DC /* Niffler.xctestplan */,
 				2FD8D9D42E728B71002766B4 /* NifflerUITests.xctestplan */,
 				749E20F22B0CAF1D0045F4E3 /* Api */,
 				746853782B0CAE9700E48DFE /* Niffler */,

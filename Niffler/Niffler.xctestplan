@@ -1,0 +1,66 @@
+{
+  "configurations" : [
+    {
+      "id" : "9893698C-090E-497F-ACA9-CD46E0B061E1",
+      "name" : "No auth",
+      "options" : {
+        "commandLineArgumentEntries" : [
+          {
+            "argument" : "RemoveAuthOnStart"
+          }
+        ]
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "username",
+        "value" : "stage"
+      },
+      {
+        "key" : "password",
+        "value" : "12345"
+      },
+      {
+        "key" : "description",
+        "value" : "Hello kiity"
+      },
+      {
+        "key" : "amount",
+        "value" : "300"
+      },
+      {
+        "key" : "selectedCategory",
+        "value" : "Рыбалка"
+      }
+    ],
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Niffler.xcodeproj",
+      "identifier" : "746853752B0CAE9700E48DFE",
+      "name" : "Niffler"
+    },
+    "testExecutionOrdering" : "random",
+    "testRepetitionMode" : "retryOnFailure"
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Niffler.xcodeproj",
+        "identifier" : "746853872B0CAE9900E48DFE",
+        "name" : "NifflerTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Niffler.xcodeproj",
+        "identifier" : "2FFCF6342E7281ED001574F7",
+        "name" : "NifflerUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
