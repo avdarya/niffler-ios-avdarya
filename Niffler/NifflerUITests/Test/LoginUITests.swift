@@ -3,8 +3,6 @@ import XCTest
 final class LoginUITests: BaseTestCase {
         
     func testLoginSuccessful() throws {
-        // Arrange
-        
         // Act
         loginPage.fillAndSubmitLoginForm(login: "stage", password: "12345")
         
@@ -13,8 +11,6 @@ final class LoginUITests: BaseTestCase {
     }
     
     func testLoginFailure() throws {
-        // Arrange
-        
         // Act
         loginPage.fillAndSubmitLoginForm(login: "stage", password: "123456")
         

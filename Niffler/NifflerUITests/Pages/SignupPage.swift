@@ -144,50 +144,5 @@ class SignupPage: BasePage {
         }
         return self
     }
-//
-//    func assertUsernameSignupScreenPrefilled(username: String) {
-//        XCTContext.runActivity(named: "Проверка предзаполнения поля username на экране Sign Up") { _ in
-//            let usernameField = app.textFields[Locators.Signup.usernameField]
-//            XCTAssertEqual(usernameField.value as? String, username)
-//        }
-//
-//    }
-//    
-//    enum PasswordVisibility {
-//        case secure
-//        case revealed
-//    }
-//    
-//    @discardableResult
-//    func assertPasswordPrefilled(password: String, visibility: PasswordVisibility) -> Self {
-//        XCTContext.runActivity(named: "Проверка предзаполнения поля password на экране Sign Up") { _ in
-//            switch visibility {
-//            case .secure:
-//                let passwordSecureField = app.secureTextFields[Locators.Signup.passwordField]
-//                XCTAssertTrue(
-//                    (passwordSecureField.value as? String)?.contains("•") == true)
-//            case .revealed:
-//                tapTogglePassword()
-//                let passwordField = app.textFields[Locators.Signup.passwordField]
-//                XCTAssertEqual(passwordField.value as? String, password)
-//            }
-//        }
-//        return self
-//    }
-    
-//    func assertSecurePasswordSignupScreenPrefilled() {
-//        XCTContext.runActivity(named: "Проверка предзаполнения поля password на экране Sign Up") { _ in
-//            let passwordSecureField = app.secureTextFields[Locators.Signup.passwordField]
-//            XCTAssertTrue((passwordSecureField.value as? String)?.contains("•") == true)
-//        }
-//
-//    }
-//    
-//    func assertPasswordSignupScreenPrefilled(password: String) {
-//        XCTContext.runActivity(named: "Проверка значения в предзаполненном поле password на экране Sign Up") { _ in
-//            app.buttons[Locators.Signup.passwordField].tap()
-//            let passwordField = app.textFields[Locators.Signup.passwordField]
-//            XCTAssertEqual(passwordField.value as? String, password)
-//        }
-//    }
+
 }

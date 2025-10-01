@@ -27,8 +27,12 @@ class BaseTestCase: XCTestCase {
     
     func launchAppWithoutLogin() {
         XCTContext.runActivity(named: "Запуск приложения в режиме 'без авторизации'") { _ in
-            app.launchArguments = ["RemoveAuthOnStart"]
-            app.launch()
+            if
+                ProcessInfo.processInfo.arguments
+                    .contains("RemoveAuthOnStart") {
+                app.launchArguments = ["RemoveAuthOnStart"]
+                app.launch()
+            }
         }
     }
 }

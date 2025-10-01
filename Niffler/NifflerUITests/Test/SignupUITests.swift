@@ -20,8 +20,6 @@ final class SignupUITests: BaseTestCase {
     }
     
     func testSignUpPrefilledData() throws {
-        // Arrange
-        
         // Act
         let randomUsername = signupPage.generateRandomUsername()
         let randomPassword = signupPage.generateRandomPassword()

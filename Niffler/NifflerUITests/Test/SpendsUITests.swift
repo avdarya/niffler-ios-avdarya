@@ -24,8 +24,6 @@ final class SpendsUITests: BaseTestCase {
     }
     
     func testNewUserHasEmptySpendList() {
-        // Arrange
-        
         // Act
         signupAndLogin()
         
@@ -36,8 +34,6 @@ final class SpendsUITests: BaseTestCase {
     }
     
     func testNewUserAddSpendWithCategory() {
-        // Arrange
-        
         // Act
         signupAndLogin()
         spendsPage
